@@ -1,5 +1,10 @@
 package chronite.dysnomia;
 
+import chronite.dysnomia.component.ModDataComponentTypes;
+import chronite.dysnomia.item.ModItemGroups;
+import chronite.dysnomia.item.ModItems;
+import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
+import eu.pb4.polymer.resourcepack.impl.client.rendering.PolymerResourcePack;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -19,6 +24,18 @@ public class Dysnomia implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world!");
+		Dysnomia.LOGGER.info("Hello Fabric world!");
+		ModItemGroups.registerItemGroups();
+		ModItems.registerModItems();
+		ModDataComponentTypes.registerDataComponentTypes();
+
+		Dysnomia.this.generatePolymerResourcePack();
+	}
+
+	public void generatePolymerResourcePack() {
+		Dysnomia.LOGGER.info("Generating Resource Pack for " + Dysnomia.MOD_ID
+		+ " with UUID " + PolymerResourcePackUtils.getMainUuid().toString());
+		PolymerResourcePackUtils.addModAssets(Dysnomia.MOD_ID);
+		PolymerResourcePackUtils.buildMain();
 	}
 }
