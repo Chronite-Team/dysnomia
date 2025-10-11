@@ -1,7 +1,6 @@
 package chronite.dysnomia.item.custom;
 
 import chronite.dysnomia.Dysnomia;
-import eu.pb4.polymer.blocks.api.PolymerBlockModel;
 import eu.pb4.polymer.core.api.item.SimplePolymerItem;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import net.minecraft.entity.EquipmentSlot;
@@ -15,7 +14,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.ModelAndTexture;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -34,16 +32,13 @@ public class AriadneThreadItem extends SimplePolymerItem {
         return Items.BOW;
     }
 
-
-
     @Override
     public @Nullable Identifier getPolymerItemModel(ItemStack stack, PacketContext context) {
-        if (PolymerResourcePackUtils.hasResources()) {
+        if (PolymerResourcePackUtils.hasMainPack(context.getPlayer())) {
             return Identifier.of(Dysnomia.MOD_ID, "ariadne_thread");
         } else {
             Dysnomia.LOGGER.info(context.getPlayer().getStringifiedName() + " doesn't have the Resource Pack.");
             return Identifier.of("minecraft","string");
-
         }
     }
 
